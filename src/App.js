@@ -11,6 +11,8 @@ const App = () => {
   // state hook
   const [recipes, setRecipes] = useState([]);
 
+  const [search, setSearch] = useState("");
+
   // call get recipes function when the browser loads
   useEffect(() => {
     getRecipes();
@@ -28,14 +30,25 @@ const App = () => {
     // setRecipes(data.hits);
   };
 
+  const updateSearch = e => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div className="App">
       <form className="search-form" action="">
-        <input className="search-bar" type="text" />
+        <input
+          value={search}
+          onChange={updateSearch}
+          className="search-bar"
+          type="text"
+        />
+
         <button className="search-button" type="submit"></button>
       </form>
       {recipes.map(recipe => (
         <Recipe
+          key={recipe.recipe.label}
           title={recipe.recipe.label}
           calories={recipe.recipe.calories}
           image={recipe.recipe.image}
