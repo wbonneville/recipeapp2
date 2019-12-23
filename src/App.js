@@ -13,16 +13,18 @@ const App = () => {
 
   const [search, setSearch] = useState("");
 
+  const [query, setQuery] = useState("chicken");
+
   // call get recipes function when the browser loads
   useEffect(() => {
     getRecipes();
-  });
+  }, [search]);
 
   // fetch recipes from api
   const getRecipes = async () => {
     // wait for information to load
     const response = await fetch(
-      `https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`
+      `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     // set data from the response and turn into into a JSON object
     const data = await response.json();
@@ -34,9 +36,14 @@ const App = () => {
     setSearch(e.target.value);
   };
 
+  const getSearch = e => {
+    e.preventDefault();
+    setQuery(search);
+  };
+
   return (
     <div className="App">
-      <form className="search-form" action="">
+      <form onSubmit={getSearch} className="search-form" action="">
         <input
           value={search}
           onChange={updateSearch}
