@@ -29,7 +29,7 @@ const App = () => {
     // set data from the response and turn into into a JSON object
     const data = await response.json();
     // set state of recipes = the array of recipes
-    // setRecipes(data.hits);
+    setRecipes(data.hits);
   };
 
   const updateSearch = e => {
@@ -52,7 +52,9 @@ const App = () => {
           type="text"
         />
 
-        <button className="search-button" type="submit"></button>
+        <button className="search-button" type="submit">
+          Submit
+        </button>
       </form>
       <div className="recipes">
         {recipes.map(recipe => (
