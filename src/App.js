@@ -18,7 +18,7 @@ const App = () => {
   // call get recipes function when the browser loads
   useEffect(() => {
     getRecipes();
-  }, [search]);
+  }, [query]);
 
   // fetch recipes from api
   const getRecipes = async () => {
@@ -29,7 +29,7 @@ const App = () => {
     // set data from the response and turn into into a JSON object
     const data = await response.json();
     // set state of recipes = the array of recipes
-    // setRecipes(data.hits);
+    setRecipes(data.hits);
   };
 
   const updateSearch = e => {
