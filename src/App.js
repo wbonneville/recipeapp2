@@ -11,8 +11,10 @@ const App = () => {
   // state hook
   const [recipes, setRecipes] = useState([]);
 
+  // the state of the input
   const [search, setSearch] = useState("");
 
+  // the state of the final input
   const [query, setQuery] = useState("chicken");
 
   // call get recipes function when the browser loads
@@ -32,18 +34,22 @@ const App = () => {
     setRecipes(data.hits);
   };
 
+  // set search = to whatever is being typed
   const updateSearch = e => {
     setSearch(e.target.value);
   };
 
+  // set the final search = to state of search
   const getSearch = e => {
     e.preventDefault();
     setQuery(search);
+    // reset search to empty string
     setSearch("");
   };
 
   return (
     <div className="App">
+      {/* pass props down */}
       <form onSubmit={getSearch} className="search-form" action="">
         <input
           value={search}
@@ -56,6 +62,7 @@ const App = () => {
           Submit
         </button>
       </form>
+      {/* map through recipes */}
       <div className="recipes">
         {recipes.map(recipe => (
           <Recipe
